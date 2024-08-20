@@ -1,0 +1,22 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*, ::after, ::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+:root {
+  --bgHex:rgb(38, 42, 65);
+  --whiteHex: #fff;
+  --headerTextHex: rgb(48, 52, 74);
+  --inputTextHex: rgba(0, 0, 0, .87);
+  --pinkHex: rgb(249, 53, 169);
+  --greenHex: rgb(48, 187, 181);
+  --purpleHex: rgb(121, 70, 193);
+  --fontPoppins: "Poppins", sans-serif;
+}
+body, html {
+  position: relative;
+  overflow-x: hidden;
+  background-color: var(--bgHex);
+}
