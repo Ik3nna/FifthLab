@@ -16,26 +16,10 @@ import { CSVLink } from 'react-csv';
 import UserCard from '@/components/userCard';
 import { UserProps } from '@/types';
 
-const usersData = [
-    {
-        text: "All users",
-        icon: <IoIosPeople color="var(--whiteHex)" size={36} />,
-        bgColor: "var(--pinkHex)"
-    },
-    {
-        text: "Male users",
-        icon: <FaMale color="var(--whiteHex)" size={36} />,
-        bgColor: "var(--greenHex)"
-    },
-    {
-        text: "All users",
-        icon: <FaFemale color="var(--whiteHex)" size={36} />,
-        bgColor: "var(--purpleHex)"
-    },
-] 
-
 const Home: React.FC = () => {
     const [userData, setUserData] = useState<UserProps[]>([]);
+    const [initialUserData, setInitialUserData] = useState<UserProps[]>([])
+    const [inputValue, setInputValue] = useState("")
     const [loading, setLoading] = useState(false);
     const [queryParams, setQueryParams] = useState({
         page: 1,
@@ -49,11 +33,46 @@ const Home: React.FC = () => {
         label: country
     }));
 
+    const handleUserSearch = ()=> {
+        if (inputValue.trim() === "") {
+            setUserData(initialUserData)
+        } else {
+            const filteredData = userData.filter(user =>
+                user.name.first.toLowerCase().includes(inputValue.toLowerCase()) ||
+                user.name.last.toLowerCase().includes(inputValue.toLowerCase())
+            )
+
+            setUserData(filteredData);
+        }
+    }
+
+    const handleCardClick = (card: string) => {
+        setQueryParams(prevState => ({
+            ...prevState,
+            gender: card
+        }));
+    }
+
+    const handleNextPage = ()=> {
+        setQueryParams(prevState => ({
+            ...prevState,
+            page: prevState.page + 1
+        }));
+    }
+
+    const handlePreviousPage = ()=> {
+        setQueryParams(prevState => ({
+            ...prevState,
+            page: prevState.page > 1 ? prevState.page - 1 : prevState.page
+        }));
+    }
+    
     const fetchUsers = async () => {
         setLoading(true);
         try {
           const result = await getUsers(queryParams);
           setUserData(result);
+          setInitialUserData(result)
         } catch (error) {
           console.log(error)
         } finally {
@@ -64,6 +83,10 @@ const Home: React.FC = () => {
     useEffect(()=>{
         fetchUsers()
     }, [queryParams])
+
+    useEffect(()=>{
+        handleUserSearch()
+    }, [inputValue])
 
     return (
         <section className={styles.container}>
@@ -77,8 +100,8 @@ const Home: React.FC = () => {
                     <div>Welcome to your dashboard, kindly sort through the user base</div>
 
                     <TextInput 
-                        value=''
-                        onChange={()=>{}}
+                        value={inputValue}
+                        onChange={(e)=>setInputValue(e.target.value)}
                         type='text'
                         placeholder='Find a user'
                         icon={
@@ -94,12 +117,14 @@ const Home: React.FC = () => {
                     <div>Show Users</div>
 
                     <div>
-                        {usersData.map((item, idx)=>(
+                        {dataArray.map((item, idx)=>(
                             <Cards 
                                 key={idx}
                                 icon={item.icon}
                                 text={item.text}
                                 bgColor={item.bgColor}
+                                gender={item.gender}
+                                onClick={handleCardClick}
                             />
                         ))}
                     </div>
@@ -115,8 +140,8 @@ const Home: React.FC = () => {
 
                     <div className={styles.inputs_container}>
                         <TextInput 
-                            value=''
-                            onChange={()=>{}}
+                            value={inputValue}
+                            onChange={(e)=>setInputValue(e.target.value)}
                             type='text'
                             placeholder='Find in list'
                             className="input"
@@ -170,11 +195,11 @@ const Home: React.FC = () => {
                     </CSVLink>
 
                     <div>
-                        <div className={styles.previous}>
+                        <div className={styles.previous} onClick={handlePreviousPage}>
                             <MdKeyboardArrowLeft color='var(--nextHex)' size={24} />
                         </div>
 
-                        <div className={styles.next}>
+                        <div className={styles.next} onClick={handleNextPage}>
                             <MdKeyboardArrowRight color='var(--whiteHex)' size={24} />
                         </div>
                     </div>
@@ -185,3 +210,25 @@ const Home: React.FC = () => {
 }
 
 export default Home
+
+
+const dataArray = [
+    {
+        text: "All users",
+        icon: <IoIosPeople color="var(--whiteHex)" size={36} />,
+        bgColor: "var(--pinkHex)",
+        gender: ""
+    },
+    {
+        text: "Male users",
+        icon: <FaMale color="var(--whiteHex)" size={36} />,
+        bgColor: "var(--greenHex)",
+        gender: "male"
+    },
+    {
+        text: "All users",
+        icon: <FaFemale color="var(--whiteHex)" size={36} />,
+        bgColor: "var(--purpleHex)",
+        gender: "female"
+    },
+] 

@@ -1,5 +1,7 @@
 import axios from 'axios';
-const BASE_URL = 'https://randomuser.me/api/';
+
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const SEED = import.meta.env.VITE_API_SEED;
 
 interface IQueryParams {
     page: number;
@@ -8,7 +10,7 @@ interface IQueryParams {
 }
 
 export const getUsers = async (query: IQueryParams) => {
-    let url = `${BASE_URL}?results=${query.results}`;
+    let url = `${BASE_URL}?results=${query.results}&seed=${SEED}`;
 
     if (query.gender) {
         url += `&gender=${query.gender}`;
