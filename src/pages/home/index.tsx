@@ -226,7 +226,7 @@ const dataArray = [
         gender: "male"
     },
     {
-        text: "All users",
+        text: "Female",
         icon: <FaFemale color="var(--whiteHex)" size={36} />,
         bgColor: "var(--purpleHex)",
         gender: "female"

@@ -10,10 +10,12 @@ interface IQueryParams {
 }
 
 export const getUsers = async (query: IQueryParams) => {
-    let url = `${BASE_URL}?results=${query.results}&seed=${SEED}`;
+    let url = `${BASE_URL}?results=${query.results}`;
 
     if (query.gender) {
         url += `&gender=${query.gender}`;
+    } else {
+        url += `&seed=${SEED}`;
     }
     if (query.page) {
         url += `&page=${query.page}`;
