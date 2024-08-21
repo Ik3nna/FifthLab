@@ -26,12 +26,12 @@
     line-height: 20px;
 }
 
-@media (min-width: 992px) and (max-width: 1199px) {
+@media (min-width: 1200px) and (max-width: 1310px) {
     .input_container input {
         min-width: 420px;
     }
 }
-@media (max-width: 991px) {
+@media (max-width: 1199px) {
     .input_container input {
         min-width: 100%;
     }

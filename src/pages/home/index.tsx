@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from "./index.module.css"
 import TextInput from '@/components/textInput'
 import { AiOutlineSearch } from "react-icons/ai";
@@ -11,6 +11,10 @@ import 'react-dropdown/style.css';
 import Switch from "react-switch";
 import { BiCloudDownload } from "react-icons/bi";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
+import { getUsers } from '@/hooks/useApi';
+import { CSVLink } from 'react-csv';
+import UserCard from '@/components/userCard';
+import { UserProps } from '@/types';
 
 const usersData = [
     {
@@ -31,12 +35,35 @@ const usersData = [
 ] 
 
 const Home: React.FC = () => {
+    const [userData, setUserData] = useState<UserProps[]>([]);
+    const [loading, setLoading] = useState(false);
+    const [queryParams, setQueryParams] = useState({
+        page: 1,
+        results: 3,
+        gender: ""
+    })
     const [checked, setChecked] = useState(true);
 
     const countryData = Country.getAllCountries().map((item) => item.name).map(country => ({
         value: country,
         label: country
     }));
+
+    const fetchUsers = async () => {
+        setLoading(true);
+        try {
+          const result = await getUsers(queryParams);
+          setUserData(result);
+        } catch (error) {
+          console.log(error)
+        } finally {
+          setLoading(false);
+        }
+    };
+
+    useEffect(()=>{
+        fetchUsers()
+    }, [queryParams])
 
     return (
         <section className={styles.container}>
@@ -67,8 +94,9 @@ const Home: React.FC = () => {
                     <div>Show Users</div>
 
                     <div>
-                        {usersData.map((item)=>(
+                        {usersData.map((item, idx)=>(
                             <Cards 
+                                key={idx}
                                 icon={item.icon}
                                 text={item.text}
                                 bgColor={item.bgColor}
@@ -110,9 +138,10 @@ const Home: React.FC = () => {
                             <Switch 
                                 checked={checked}
                                 checkedIcon={false}
+                                uncheckedIcon={false}
                                 onColor="#30BBB5"
                                 onHandleColor='#30BBB5'
-                                onChange={()=>{}}
+                                onChange={()=>setChecked(!checked)}
                             />
 
                             <span>Show Country</span>
@@ -120,11 +149,25 @@ const Home: React.FC = () => {
                     </div>
                 </div>
 
+                <div className={styles.users_container}>
+                    {userData.map((item, idx)=>(
+                        <UserCard 
+                            key={idx}
+                            img={item.picture.large}
+                            name={item.name}
+                            location={item.location}
+                            checked={checked}
+                            email={item.email}
+                            phone={item.phone}
+                        />
+                    ))}
+                </div>
+
                 <div className={styles.navigation}>
-                    <a href="https://randomuser.me/api/?format=csv" className={styles.download}>
+                    <CSVLink data={userData} target='_blank' className={styles.download}>
                         <BiCloudDownload size={30} color='var(--whiteHex)' />
                         <span>Download Results</span>
-                    </a>
+                    </CSVLink>
 
                     <div>
                         <div className={styles.previous}>

@@ -55,3 +55,9 @@ img, svg {
 .react-switch-bg {
   opacity: 0.32;
 }
+
+@media (max-width: 767px) {
+  .Dropdown-root {
+    width: 100%;
+  }
+}
