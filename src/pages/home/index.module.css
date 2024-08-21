@@ -26,9 +26,13 @@
 }
 .user_details {
     background-color: var(--subBgHex);
-    height: 90vh;
+    padding: 80px 30px;
     width: 50%;
     border-radius: 17px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    row-gap: 50px;
 }
 .wrapper2 {
     margin-top: 35px;
@@ -41,6 +45,89 @@
     align-items: center;
     margin-top: 15px;
 }
+
+
+/* Navigations */
+.filter > div:nth-of-type(1) > div:nth-of-type(1) {
+    font-weight: 700;
+    font-size: 22px;
+    color: var(--headerTextHex);
+}
+.filter > div:nth-of-type(1) > div:nth-of-type(2) {
+    font-size: 12px;
+    color: var(--headerTextHex);
+}
+.inputs_container {
+    display: flex;
+    justify-content: space-between;
+    column-gap: 30px;
+    align-items: center;
+    margin-top: 15px;
+}
+.input {
+    opacity: 1 !important;
+}
+.input div {
+    left: 20px !important;
+    top: 65% !important;
+    transform: translateY(-65%) !important;
+}
+.input input {
+    background: var(--inputBgHex);
+    border-radius: 40px !important;
+    min-width: 200px !important;
+    padding-left: 50px !important;
+}
+.switch_container {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--inputPlaceholderHex);
+}
+
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.download {
+    background-color: var(--purpleHex);
+    display: flex;
+    align-items: center;
+    column-gap: 5px;
+    height: 50px;
+    padding: 16px;
+    border-radius: 50px;
+    color: var(--whiteHex);
+    font-weight: 100;
+}
+.navigation > div {
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+.previous, .next {
+    background-color: var(--previousHex);
+    height: 40px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.next {
+    background-color: var(--nextHex);
+}
+.download:hover, .previous:hover, .next:hover {
+    transform: scale(0.98);
+}
+
+
 
 
 

@@ -11,9 +11,12 @@
   --subBgHex: rgb(247, 247, 255);
   --headerTextHex: rgb(48, 52, 74);
   --inputTextHex: rgba(0, 0, 0, .87);
+  --inputBgHex: rgba(0, 0, 0, .06);
   --inputPlaceholderHex: rgba(0, 0, 0, .6);
   --pinkHex: rgb(249, 53, 169);
   --greenHex: rgb(48, 187, 181);
+  --previousHex: rgb(226, 227, 236);
+  --nextHex: rgb(32, 48, 56);
   --purpleHex: rgb(121, 70, 193);
   --fontPoppins: "Poppins", sans-serif;
 }
@@ -22,4 +25,33 @@ body, html {
   overflow-x: hidden;
   background-color: var(--bgHex);
   font-family: var(--fontPoppins);
+}
+a {
+  text-decoration: none;
+}
+img, svg {
+  cursor: pointer;
+}
+
+
+.Dropdown-control {
+  border-radius: 40px;
+  min-width: 200px;
+  height: 48px;
+  padding-left: 50px;
+  background: var(--inputBgHex);
+  color: var(--inputTextHex);
+  font-size: 16px;
+  border: none;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.Dropdown-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.react-switch-bg {
+  opacity: 0.32;
 }
