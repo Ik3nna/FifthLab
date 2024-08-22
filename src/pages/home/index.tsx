@@ -168,11 +168,14 @@ const Home: React.FC = () => {
                             }
                         />
 
-                        <Dropdown 
-                            options={countryData} 
-                            placeholder="country"
-                            value={countryData.find((item)=>item.value==="Nigeria")}
-                        />
+                        <div className={styles.country_dropdown}>
+                            <span>Country</span>
+                            <Dropdown 
+                                options={countryData} 
+                                placeholder="country"
+                                value={countryData.find((item)=>item.value==="Nigeria")}
+                            />
+                        </div>
 
                         <div className={styles.switch_container}>
                             <Switch 

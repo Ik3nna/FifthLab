@@ -52,6 +52,11 @@ img, svg {
   align-items: center;
   cursor: pointer;
 }
+.Dropdown-placeholder {
+  position: absolute;
+  left: 20px;
+  top: 21px;
+}
 .Dropdown-arrow {
   position: absolute;
   top: 50%;
