@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    align-items: center;
+    column-gap: 2px;
+    padding: 0 16px;
+    color: var(--tagsHex);
+    border-radius: 28px;
+    width: fit-content;
+    height: 36px;
+    letter-spacing: .0892857143em;
+    cursor: pointer;
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+.container:hover {
+    transform: scale(0.98);
+}
+
+@media (max-width: 767px) {
+    .container {
+        width: 100%;
+    }
+}

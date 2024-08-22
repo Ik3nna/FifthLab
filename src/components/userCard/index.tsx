@@ -9,10 +9,11 @@ interface UserCardProps {
     location: any,
     checked: boolean,
     email: string,
-    phone: string
+    phone: string,
+    onClick: (name: string)=> void
 }
 
-const UserCard = ({ img, name, location, checked, email, phone }: UserCardProps) => {
+const UserCard = ({ img, name, location, checked, email, phone, onClick }: UserCardProps) => {
   return (
     <section className={styles.container}>
         <img src={img} />
@@ -36,7 +37,7 @@ const UserCard = ({ img, name, location, checked, email, phone }: UserCardProps)
                     <>{phone}</>
                 </div>
 
-                <div>
+                <div onClick={()=>onClick(name.first)}>
                     <FaArrowRight color="var(--whiteHex)" size={24} />
                 </div>
             </div>

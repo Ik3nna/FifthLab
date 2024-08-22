@@ -17,6 +17,11 @@
   --greenHex: rgb(48, 187, 181);
   --previousHex: rgb(226, 227, 236);
   --nextHex: rgb(32, 48, 56);
+  --tagsHex: rgba(0, 0, 0, .26);
+  --tag1BgHex: rgba(0, 0, 0, .12);
+  --tag2BgHex: rgba(247, 217, 242);
+  --resultsHex: rgba(117, 214, 209);
+  --phoneHex: rgba(186, 189, 209);
   --purpleHex: rgb(121, 70, 193);
   --fontPoppins: "Poppins", sans-serif;
 }
@@ -55,6 +60,7 @@ img, svg {
 .react-switch-bg {
   opacity: 0.32;
 }
+
 
 @media (max-width: 767px) {
   .Dropdown-root {
